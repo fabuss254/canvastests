@@ -78,18 +78,7 @@ bot.on('message', message => {
       var fontPath = './Fonts/Bold.otf';
       var file = fs.createWriteStream("file.png");
       message.channel.send(message.member.displayAvatarURL)
-      var request = http.get(message.member.displayAvatarURL, function(response) {
-        response.pipe(file);
-        var logo = gd.createFromPng("file.png");
-        logo.copy(img, 0, 0, 0, 0, 100, 100);
-        img.savePng('output.png', 1, function(err) {
-          if(err) {
-            throw err;
-          }
-          message.channel.send({files: [{attachment: 'output.png',name: 'output.png'}]})
-          img.destroy();
-        });
-      });
+      img.destroy();
       break;
       
     default:
