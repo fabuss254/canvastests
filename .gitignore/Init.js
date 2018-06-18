@@ -30,7 +30,7 @@ bot.on('message', message => {
         if(err) {
           throw err;
         }
-        message.send({files: [{attachment: 'output.png',name: 'output.png'}]})
+        message.channel.send({files: [{attachment: 'output.png',name: 'output.png'}]})
       });
 
       // Destroy image to clean memory
