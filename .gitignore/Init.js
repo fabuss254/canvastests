@@ -24,7 +24,7 @@ bot.on('message', message => {
       var img = gd.createSync(200, 80);
       img.colorAllocate(0, 255, 0);
       var txtColor = img.colorAllocate(255, 0, 255);
-      var fontPath = '/Fonts/Ezo.ttf';
+      var fontPath = './Fonts/Ezo.ttf';
       img.stringFT(txtColor, fontPath, 24, 0, 10, 60, 'Hello world!');
       img.savePng('output.png', 1, function(err) {
         if(err) {
@@ -37,7 +37,7 @@ bot.on('message', message => {
       img.destroy();
       
     default:
-      message.channel.send("Invalid command!").delete(5000);
+      message.channel.send("Invalid command!").then(msg => msg.delete(5000));
       message.delete(100);
     break;
   }
