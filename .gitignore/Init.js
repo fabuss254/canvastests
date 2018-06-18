@@ -71,8 +71,8 @@ bot.on('message', message => {
       break;
       
     case "vcs1":
-      var Argument = message.content.substring(8, message.content.length);
-      var img = gd.createSync(Argument.length * 24, 200);
+      var Argument = message.content.substring(6, message.content.length);
+      var img = gd.createSync(500, 200);
       img.colorAllocate(0, 0, 0);
       var txtColor = img.colorAllocate(255, 255, 255);
       var fontPath = './Fonts/Bold.otf';
