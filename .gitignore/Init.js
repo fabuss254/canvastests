@@ -33,8 +33,24 @@ bot.on('message', message => {
         message.channel.send({files: [{attachment: 'output.png',name: 'output.png'}]})
       });
 
-      // Destroy image to clean memory
       img.destroy();
+      break;
+      
+    case "canvas2":
+      var img = gd.createSync(200, 80);
+      img.colorAllocate(0, 0, 0);
+      var txtColor = img.colorAllocate(255, 255, 255);
+      var fontPath = './Fonts/Bold.otf';
+      img.stringFT(txtColor, fontPath, 24, 0, 10, 60, args[1]);
+      img.savePng('output.png', 1, function(err) {
+        if(err) {
+          throw err;
+        }
+        message.channel.send({files: [{attachment: 'output.png',name: 'output.png'}]})
+      });
+
+      img.destroy();
+      break;
       
     default:
       message.channel.send("Invalid command!").then(msg => msg.delete(5000));
