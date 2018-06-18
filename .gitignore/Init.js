@@ -2,6 +2,8 @@
 
 const Discord = require("discord.js");
 const gd = require('node-gd');
+const http = require('http');
+const fs = require('fs');
 
 var prefix = "%";
 var footer = "Created by Fabuss254#9232";
@@ -64,9 +66,30 @@ bot.on('message', message => {
           throw err;
         }
         message.channel.send({files: [{attachment: 'output.png',name: 'output.png'}]})
+        img.destroy();
       });
-
-      img.destroy();
+      break;
+      
+    case "vcs1":
+      var Argument = message.content.substring(8, message.content.length);
+      var img = gd.createSync(Argument.length * 24, 200);
+      img.colorAllocate(0, 0, 0);
+      var txtColor = img.colorAllocate(255, 255, 255);
+      var fontPath = './Fonts/Bold.otf';
+      var file = fs.createWriteStream("file.png");
+      message.channel.send(message.member.displayAvatarURL)
+      var request = http.get(message.member.displayAvatarURL, function(response) {
+        response.pipe(file);
+        var logo = gd.createFromPng("file.png");
+        logo.copy(img, 0, 0, 0, 0, 100, 100);
+        img.savePng('output.png', 1, function(err) {
+          if(err) {
+            throw err;
+          }
+          message.channel.send({files: [{attachment: 'output.png',name: 'output.png'}]})
+          img.destroy();
+        });
+      });
       break;
       
     default:
