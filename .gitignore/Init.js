@@ -52,6 +52,23 @@ bot.on('message', message => {
       img.destroy();
       break;
       
+    case "canvas3":
+      var Argument = message.content.substring(8, message.content.length);
+      var img = gd.createSync(Argument.length * 24, 100);
+      img.colorAllocate(0, 0, 0);
+      var txtColor = img.colorAllocate(255, 255, 255);
+      var fontPath = './Fonts/Bold.otf';
+      img.stringFT(txtColor, fontPath, 24, 0, 10, 50, Argument);
+      img.savePng('output.png', 1, function(err) {
+        if(err) {
+          throw err;
+        }
+        message.channel.send({files: [{attachment: 'output.png',name: 'output.png'}]})
+      });
+
+      img.destroy();
+      break;
+      
     default:
       message.channel.send("Invalid command!").then(msg => msg.delete(5000));
       message.delete(100);
