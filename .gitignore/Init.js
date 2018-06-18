@@ -2,8 +2,8 @@
 
 const Discord = require("discord.js");
 
-var prefix = Preferences.Prefix;
-var footer = Preferences.Footer_Embed;
+var prefix = "%";
+var footer = "Created by Fabuss254#9232";
 
 var bot = new Discord.Client();
 
